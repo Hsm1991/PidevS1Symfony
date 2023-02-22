@@ -1,4 +1,5 @@
-{% extends 'base-back.html.twig' %}
+{% extends getRole(app.request) == "ROLE_ARTISTE" ? "base-front-artiste.html.twig" :  getRole(app.request) == "ROLE_PRESTATAIRE"  ? 'base-back-prest.html.twig' : 'base-back.html.twig' %}
+
 
 {% block title %}Calendrier des Evènements{% endblock %}
 
@@ -64,5 +65,5 @@
         }
 
     </script>
-    <a href="{{ path('app_event_index') }}"><button class="btn btn-info">Retour En Arrière</button>
+
 {% endblock %}

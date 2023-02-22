@@ -79,18 +79,7 @@ class EvenementType extends AbstractType
 
                 // unmapped fields can't define their validation using annotations
                 // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '2004800',
-                        'mimeTypes' => [
-                            'image/gif',
-                            'image/jpeg',
-                            'image/jpg',
-
-                        ],
-                        'mimeTypesMessage' => 'Importez Une Image Valide SVP',
-                    ])
-                ],
+              
             ]);
 
 

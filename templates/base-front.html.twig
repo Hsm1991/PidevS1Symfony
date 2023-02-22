@@ -39,66 +39,27 @@
     <body>
     <!-- Start Main Top -->
     <div class="main-top">
+
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="custom-select-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-                            <option>¥ JPY</option>
-                            <option>$ USD</option>
-                            <option>€ EUR</option>
-                        </select>
-                    </div>
-                    <div class="right-phone-box">
-                        <p>Nous Appeler :- <a href="#"> +216-71000000</a></p>
-                    </div>
                     <div class="our-link">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user s_color"></i> Mon Compte</a></li>
-                            <li><a href="#"><i class="fas fa-headset"></i> Contact</a></li>
+                            <li><a href="/front/modify"><i class="fa fa-user s_color"></i> Mon Compte</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <div class="login-box">
-                        <select id="basic" class="selectpicker show-tick form-control" data-placeholder="Sign In">
-                            <option>Inscrivez-vous ici</option>
-                            <option>S'identifier</option>
-                        </select>
-                    </div>
-                    <div class="text-slid-box">
-                        <div id="offer-box" class="carouselTicker">
-                            <ul class="offer-box">
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% Sur Tout Le Code Promotionnel D'achat: offT80
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% Promo Sur les Oeuvres
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Promo 10%! Evenements
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Promo De 50%! Sur Nos Salles
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Promo 10%! Evenements
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 50% - 80% Promo Sur les Oeuvres
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> 20% Sur Tout Le Code Promotionnel D'achat: offT80
-                                </li>
-                                <li>
-                                    <i class="fab fa-opencart"></i> Promo De 50%! Sur Nos Salles
-                                </li>
-                            </ul>
-                        </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+                    <div class="our-link" style="margin-left: 80%">
+                        <ul>
+                            <li><a href="/login"><i class="fa fa-user s_color"></i> Se Déconnecter</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- End Main Top -->
 
@@ -112,30 +73,26 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand" href="front.html.twig"><img src="{{ asset('client/images/logo1.jpg')}}" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="/ev/front"><img src="{{ asset('client/images/logo1.jpg')}}" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="nav-item active"><a class="nav-link" href="front.html.twig">Acceuil</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">À propos de nous</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="/ev/front">Acceuil</a></li>
+
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">BOUTIQUE</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/ev/front/evenement">Evenements</a></li>
-                                <li><a href="">Oeuvres</a></li>
-                                <li><a href="shop.html.twig">Salles</a></li>
-                                <li><a href="shop-detail.html">Détail de la boutique</a></li>
-                                <li><a href="cart.html">Panier</a></li>
-                                <li><a href="checkout.html">Vérifier</a></li>
-                                <li><a href="my-account.html">Mon Compte</a></li>
-                                <li><a href="wishlist.html">Liste de souhaits</a></li>
+                                <li><a href="/shop">Oeuvres</a></li>
+{#                                <li><a href="/salle/front/s">Salles</a></li>#}
                             </ul>
                         </li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallerie</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact</a></li>
+
+                        <li class="nav-item"><a class="nav-link" href="/reclamation/front">Passer Réclamation</a></li>
+{#                        <li class="nav-item"><a class="nav-link" href="/default">Statistiques De Vos Commandes</a></li>#}
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -143,7 +100,7 @@
                 <!-- Start Atribute Navigation -->
                 <div class="attr-nav">
                     <ul>
-                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
+{#                        <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>#}
                         <li class="side-menu">
                             <a href="#">
                                 <i class="fa fa-shopping-bag"></i>
@@ -156,34 +113,35 @@
                 <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="{{ asset('client/images/tab2.jpg')}}" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Tableau Pop Art Femme </a></h6>
-                            <p>1x - <span class="price">1800.00 DT</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="{{ asset('client/images/tab1.jpg')}}" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">TABLEAU STREET ART BANKSY</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="{{ asset('client/images/tab3.jpg')}}" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Tranche de Vie</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
+            {% block sidepanier %}
+                {% set panier=getPanier() %}
+
+                <div class="side">
+                    <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                    <li class="cart-box">
+                        <ul class="cart-list">
+                            {% for prod in panier %}
+                                <li>
+                                    <a href="#" class="photo"><img src="{{ asset('uploads/'~ getImgName(prod['image'])) }}" class="cart-thumb" alt="" /></a>
+                                    <h6><a href="#">{{ prod['nomProd'] }}</a></h6>
+                                    <p>{{ prod['quantite']}} x <span class="price">{{ '$'~getPrixRemise(prod['idProd']) }}</span></p>
+                                </li>
+                            {% endfor %}
+
+                            <li class="total">
+                                <a href="{{ path('app_panier_index') }}" class="btn btn-default hvr-hover btn-cart" style="min-width: 220px;max-width: 220px">AFFICHER PANIER</a>
+                                <a href="{{ path('app_commande_indexFront') }}" class="btn btn-default hvr-hover btn-cart" style="min-width: 220px;max-width: 220px">AFFICHER COMMANDES</a>
+                                <a href="{{ path('app_facture_indexFront') }}" class="btn btn-default hvr-hover btn-cart" style="min-width: 220px;max-width: 220px">AFFICHER FACTURES</a>
+
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            {% endblock %}
+
             <!-- End Side Menu -->
         </nav>
+{#        {% endblock %}#}
         <!-- End Navigation -->
     </header>
 
@@ -201,53 +159,54 @@
     </div>
     <!-- End Top Search -->
 
-    <!-- Start Slider -->
-    <div id="slides-shop" class="cover-slides">
-        <ul class="slides-container">
-            <li class="text-center">
-                <img src="{{ asset('client/images/img_1.jpg')}}" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Bienvenue dans<br> BAZ'ART</strong></h1>
-                            <p class="m-b-40">Voyez comment vos utilisateurs perçoivent votre site Web en temps réel ou visualisez <br> tendances pour voir tout changement de performance au fil du temps.</p>
-                            <p><a class="btn hvr-hover" href="#">Nouveaute au boutique</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="{{ asset('client/images/img_2.jpg')}}" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Bienvenue dans <br> BAZ'ART</strong></h1>
-                            <p class="m-b-40">Voyez comment vos utilisateurs perçoivent votre site Web en temps réel ou visualisez <br> tendances pour voir tout changement de performance au fil du temps.</p>
-                            <p><a class="btn hvr-hover" href="#">Nouveaute au boutique</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="text-center">
-                <img src="{{ asset('client/images/img_3.jpg')}}" alt="">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="m-b-20"><strong>Bienvenue dans <br> BAZ'ART</strong></h1>
-                            <p class="m-b-40">Voyez comment vos utilisateurs perçoivent votre site Web en temps réel ou visualisez <br> tendances pour voir tout changement de performance au fil du temps.</p>
-                            <p><a class="btn hvr-hover" href="#">Nouveaute au boutique</a></p>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        <div class="slides-navigation">
-            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
-        </div>
-    </div>
-    <!-- End Slider -->
-
+{#    <!-- Start Slider -->#}
+{#    {% block slider %}#}
+{#    <div id="slides-shop" class="cover-slides">#}
+{#        <ul class="slides-container">#}
+{#            <li class="text-center">#}
+{#                <img src="{{ asset('client/images/img_1.jpg')}}" alt="">#}
+{#                <div class="container">#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-12">#}
+{#                            <h1 class="m-b-20"><strong>Bienvenue dans<br> BAZ'ART</strong></h1>#}
+{#                            <p class="m-b-40">Voyez comment vos utilisateurs perçoivent votre site Web en temps réel ou visualisez <br> tendances pour voir tout changement de performance au fil du temps.</p>#}
+{#                            <p><a class="btn hvr-hover" href="#">Nouveaute au boutique</a></p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+{#            <li class="text-center">#}
+{#                <img src="{{ asset('client/images/img_2.jpg')}}" alt="">#}
+{#                <div class="container">#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-12">#}
+{#                            <h1 class="m-b-20"><strong>Bienvenue dans <br> BAZ'ART</strong></h1>#}
+{#                            <p class="m-b-40">Voyez comment vos utilisateurs perçoivent votre site Web en temps réel ou visualisez <br> tendances pour voir tout changement de performance au fil du temps.</p>#}
+{#                            <p><a class="btn hvr-hover" href="#">Nouveaute au boutique</a></p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+{#            <li class="text-center">#}
+{#                <img src="{{ asset('client/images/img_3.jpg')}}" alt="">#}
+{#                <div class="container">#}
+{#                    <div class="row">#}
+{#                        <div class="col-md-12">#}
+{#                            <h1 class="m-b-20"><strong>Bienvenue dans <br> BAZ'ART</strong></h1>#}
+{#                            <p class="m-b-40">Voyez comment vos utilisateurs perçoivent votre site Web en temps réel ou visualisez <br> tendances pour voir tout changement de performance au fil du temps.</p>#}
+{#                            <p><a class="btn hvr-hover" href="#">Nouveaute au boutique</a></p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </li>#}
+{#        </ul>#}
+{#        <div class="slides-navigation">#}
+{#            <a href="#" class="next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>#}
+{#            <a href="#" class="prev"><i class="fa fa-angle-left" aria-hidden="true"></i></a>#}
+{#        </div>#}
+{#    </div>#}
+{#    <!-- End Slider -->#}
+{#    {% endblock %}#}
 
 
     {% block body %}
@@ -261,9 +220,9 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
-                            <h4>About BAZ'ART</h4>
-                            <p>BAZ'ART est une plateforme qui vous aide à bien organiser, gérer vos évenemts ainsi que de participer a des évènements</p>
-                            <p>Vous pouvez ici participer a des évènements, réserver des salles pour organiser vos évènement ainsi que vous pouvez acheter des ouevres d'Art qui sont a votre disposition </p>
+                            <h4>A Propos De BAZ'ART</h4>
+                            <p>BAZ'ART est une plateforme qui vous aide à bien organiser, gérer vos évènemts ainsi que de participer a des évènements</p>
+                            <p>Vous pouvez ici participer a des évènements, réserver des salles pour organiser vos évènements ainsi que vous pouvez acheter des ouevres d'Art qui sont a votre disposition </p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -281,7 +240,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-link-contact">
-                            <h4>Contact Us</h4>
+                            <h4>Nous Contacter</h4>
                             <ul>
                                 <li>
                                     <p><i class="fas fa-map-marker-alt"></i>Address: Cité El Ghazela <br>Grouvernorat D'Ariana,<br> Tunisie</p>

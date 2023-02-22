@@ -1,5 +1,4 @@
-{% extends 'base-back.html.twig' %}
-
+{% extends getRole(app.request) == "ROLE_ARTISTE" ? "base-front-artiste.html.twig" :  getRole(app.request) == "ROLE_PRESTATAIRE"  ? 'base-back-prest.html.twig' : 'base-back.html.twig' %}
 
 
 {% block title %}Evenement index{% endblock %}
@@ -15,7 +14,8 @@
         {% endfor %}
     {% endfor %}
 
-    <table class="table table-bordered border-primary">
+    <table class="table table-bordered border-primary" style="margin-left: auto;
+  margin-right: auto;">
         <thead>
             <tr>
                 <th class="h5">Id</th>
@@ -45,9 +45,10 @@
                 <td class="h5">{{ evenement.TypeEvent }}</td>
                 <td class="h5">{{ evenement.CategorieEvent }}</td>
                 <td class="h5">{{ evenement.PrixEntre }}</td>
-                <td class="h5">{{ evenement.image1 }}
-                    <img  class="rounded mx-auto d-block" style="width: 25rem;"
-                         src={{ asset('uploads/personnes/' ~ evenement.image1) }}  >
+                <td class="h5">
+                    <img  class="rounded mx-auto d-block" width="60" height="60"
+                          class ="fluid my-2 rounded"
+                         src={{ asset('uploads/personnes/' ~ getImgName(evenement.image1))}}  >
                     <a href=""></a>
                 </td>
 

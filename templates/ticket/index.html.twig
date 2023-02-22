@@ -1,4 +1,5 @@
-{% extends 'base-back.html.twig' %}
+{#{% extends getRole(app.request) == "ROLE_ARTISTE" ? "base-back-artiste.html.twig" :  getRole(app.request) == "ROLE_PRESTATAIRE"  ? 'base-back-prest.html.twig' : 'base-back.html.twig' %}#}
+{% extends  "base-front-artiste.html.twig" %}
 
 {% block title %}Tickets Index{% endblock %}
 

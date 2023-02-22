@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Entity\Salle;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
@@ -19,8 +20,9 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class EventController extends AbstractController
 {
     #[Route('/', name: 'app_event_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(EvenementRepository $evenementRepository,PanierController $panierController): Response
     {
+
         return $this->render('event/index.html.twig', [
             'evenements' => $evenementRepository->findAll(),
         ]);
@@ -64,7 +66,7 @@ class EventController extends AbstractController
 
                         // updates the 'brochureFilename' property to store the PDF file name
                         // instead of its contents
-                        $evenement->setImage1($newFilename);
+                        $evenement->setImage1('C:\Users\User\Desktop\TRAVAIL_FINAL\IntegrationFinale-image-like\public\uploads\personnes\\'.$newFilename);
 
                     }
 

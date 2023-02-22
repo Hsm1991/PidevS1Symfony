@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-    #[Route('/hsm', name: 'app_main')]
+    #[Route('cal/hsm', name: 'app_main_cal')]
     public function index(EventCalendarRepository $calendar)
     {
         $events = $calendar->findAll();

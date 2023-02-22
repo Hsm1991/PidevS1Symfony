@@ -3,10 +3,17 @@
 namespace App\Controller;
 
 
+use App\Entity\Commande;
 use App\Entity\Evenement;
+use App\Entity\Facture;
+use App\Entity\Ticket;
 use App\Form\EvenementType;
+use App\Repository\CommandeRepository;
 use App\Repository\EvenementRepository;
+use App\Repository\ProduitRepository;
+use App\Repository\SalleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
@@ -28,10 +36,20 @@ use Symfony\Component\Mime\Email;
 class EventFrontController extends AbstractController
 {
     #[Route('/', name: 'app_event_index_front', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(EvenementRepository $evenementRepository,SalleRepository $salleRepository,ProduitRepository $produitRepository): Response
     {
         return $this->render('show.html.twig', [
             'evenements' => $evenementRepository->findAll(),
+            'salles' => $salleRepository->findAll(),
+            'produits'=>$produitRepository->findAll()
+        ]);
+    }
+
+    #[Route('/s', name: 'app_event_salle_front', methods: ['GET'])]
+    public function salle(SalleRepository $salleRepository): Response
+    {
+        return $this->render('salle_front/front.html.twig', [
+            'salles' => $salleRepository->findAll(),
         ]);
     }
     #[Route('/evenement', name: 'app_event_evenement_front', methods: ['GET'])]
@@ -127,7 +145,7 @@ class EventFrontController extends AbstractController
     }
 
     #[Route('/Achat/{id}', name: 'Achat', methods: ['GET','POST'])]
-    public function Achat(Evenement $evenement,$id,Request $req,EntityManagerInterface $entityManager ): Response
+    public function Achat(Evenement $evenement,$id,Request $req,EntityManagerInterface $entityManager  ): Response
     {
 
         $repository = $entityManager->getRepository(Evenement::class);
@@ -139,7 +157,36 @@ class EventFrontController extends AbstractController
             $entityManager->flush();
 
         }
-        return $this->redirectToRoute('app_event_evenement_front');
+
+        $stripe = new \Stripe\StripeClient(
+
+            'sk_test_51MAfj4ES68ocXgHIpdFomTcCjhbHmiAxj1muKgPyOj3taEtnkmP3nPXZwmwMWQUC9nq44xiAYN6RfyPY4mKmFOvn00fV8NftXF'
+        );
+
+
+        $session =$stripe->checkout->sessions->create([
+            'payment_method_types' => ['card'],
+            'customer_email' => 'customer@example.com',
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => 'ticket',
+                        ],
+                        'unit_amount' => $evenement->getPrixEntre()*100,
+                    ],
+                    'quantity' => 1,
+                ]
+            ],
+            'mode' => 'payment',
+
+            'success_url' => $this->generateUrl('app_stripe_success_ticket',['id'=>$evenement->getId()], UrlGeneratorInterface::ABSOLUTE_URL),
+            'cancel_url' => $this->generateUrl('app_stripe_echec', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        ]);
+        dump($session);
+
+        return $this->redirect($session->url, 303);
     }
     #[Route('/Reservation/{id}', name: 'Reservetion', methods: ['GET','POST'])]
     public function Reservation  (Evenement $evenement,$id,Request $req,EntityManagerInterface $entityManager,MailerInterface $mailer ): Response
@@ -175,7 +222,7 @@ class EventFrontController extends AbstractController
             $mail->isHTML(true);// Set email format to HTML
 
             $mail->Username = 'houssemeddine.mhedhbi@esprit.tn';// SMTP username
-            $mail->Password = 'L**********';// SMTP password
+            $mail->Password = 'SarahDanah2021';// SMTP password
 
             $mail->setFrom('houssemeddine.mhedhbi@esprit.tn', 'Admin Evènements');//Your application NAME and EMAIL
             $mail->Subject = 'Nouvelle Réservation De Ticket';//Message subject
@@ -191,5 +238,22 @@ class EventFrontController extends AbstractController
 
         }
         return $this->redirectToRoute('app_event_evenement_front');
+    }
+
+
+
+
+    #[Route('Reservation/checkout/success/{id}', name: 'app_stripe_success_ticket')]
+    public function successUrl(Evenement $evenement,ManagerRegistry $doctrine): Response
+    {
+        $em= $doctrine->getManager();
+        $ticket = new Ticket();
+        $ticket->setNomEvent($evenement->getNomEvent());
+        $ticket->setPrixTicket($evenement->getPrixEntre());
+        $ticket->setTypeTicket('2ème Choix');
+        $em->persist($ticket);
+        $em->flush();
+
+        return $this->render('stripe/success.html.twig');
     }
 }

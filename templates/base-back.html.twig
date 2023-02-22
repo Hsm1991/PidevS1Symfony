@@ -11,7 +11,7 @@
     <meta name="author" content="">
 
     <title>Admin Interface - {% block title %}Dashboard{% endblock %}</title>
-
+{% block css %}
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.3.1/main.min.js"
             integrity="sha256-aZcQFPL6+lsgcL5uMWS2B/cf6WplQQOEhLKi88tYh6A=" crossorigin="anonymous"></script>
 
@@ -28,7 +28,19 @@
     <!-- Custom styles for this template-->
 
     <link href="{{ asset('back-office/css/sb-admin-2.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('client/css/reclamation-back.css') }}">
 
+    <link href="{{ asset('malek/css/style.css') }}" rel="stylesheet">
+    <link href="http://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <style>
+        .dspnone {
+            display: none !important;
+        }
+        .sf-toolbar{
+            display: none !important;
+        }
+    </style>
 
 
 
@@ -36,10 +48,13 @@
     <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
     <script src="//code.jquery.com/jquery.js"></script>
 
+    <!-- Amira -->
+    <link rel="stylesheet" href="{{ asset('client/css/table-amira.css')}}">
+
+{% endblock %}
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
 
 </head>
 
@@ -73,11 +88,11 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html.twig">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/home">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">Interface de Gestion</div>
+            <div class="sidebar-brand-text mx-3">BAZ'ART</div>
         </a>
 
         <!-- Divider -->
@@ -85,7 +100,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/home">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -93,24 +108,128 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
+{#        <li class="nav-item">#}
+{#            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1"#}
+{#               aria-expanded="true" aria-controls="collapsePages">#}
+{#                <i class="fas fa-fw fa-folder"></i>#}
+{#                <span>Gestion Des Evènements</span>#}
+{#            </a>#}
+{#            <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">#}
+{#                <div class="bg-white py-2 collapse-inner rounded">#}
+
+{#                    <a class="collapse-item" href="/event/">Evènements Index</a>#}
+{#                    <a class="collapse-item" href="/event/new">Ajouter Un Evènement</a>#}
+{#                    <a class="collapse-item" href="/ticket">Tickets Index</a>#}
+{#                    <a class="collapse-item" href="/ticket/new">Ajouter Un Ticket</a>#}
+{#                    <a class="collapse-item" href="/ca">Calendrier Index</a>#}
+{#                    <a class="collapse-item" href="/ca/new">Ajouter Au Calendrier</a>#}
+{#                    <a class="collapse-item" href="{{ path('app_main_cal') }}">Consulter Calendrier</a>#}
+
+{#            </div>#}
+{#        </li>#}
+
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages2"
                aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
-                <span>Gestion Des Evènements</span>
+                <span>Gestion Des Réclamations</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
 
-                    <a class="collapse-item" href="/event/">Evènements Index</a>
-                    <a class="collapse-item" href="/event/new">Ajouter Un Evènement</a>
-                    <a class="collapse-item" href="/ticket">Tickets Index</a>
-                    <a class="collapse-item" href="/ticket/new">Ajouter Un Ticket</a>
-                    <a class="collapse-item" href="/ca">Calendrier Index</a>
-                    <a class="collapse-item" href="/ca/new">Ajouter Au Calendrier</a>
-                    <a class="collapse-item" href="/hsm">Consulter Calendrier</a>
+                    <a class="collapse-item" href="/reclamation/back">Liste Des Réclamations</a>
+                    <a class="collapse-item" href="/reclamation/plusreclamé/metier">Services Plus Réclamés</a>
 
-            </div>
+
+
+                </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Gestion Salles & Réservations</span>
+            </a>
+            <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    <a class="collapse-item" href="/salle/">Salles Index</a>
+                    <a class="collapse-item" href="/salle/new">Ajouter Une Salle</a>
+                    <a class="collapse-item" href="/resnew">Reservations Index</a>
+                    <a class="collapse-item" href="/resnew/new">Ajouter Une Reservation</a>
+
+
+                </div>
+        </li>
+
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Gestion Panier</span>
+            </a>
+            <div id="collapsePages4" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    <a class="collapse-item" href="/commande/">Liste Des Commandes</a>
+                    <a class="collapse-item" href="/facture">Liste Des Factures</a>
+
+
+
+                </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages5"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Gestion Stock</span>
+            </a>
+            <div id="collapsePages5" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    <a class="collapse-item" href="/commandpm">Liste Des Commandes</a>
+                    <a class="collapse-item" href="/produitpm/afficher">Liste Des Matières Premières</a>
+
+
+
+                </div>
+        </li>
+
+{#        <li class="nav-item">#}
+{#            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages6"#}
+{#               aria-expanded="true" aria-controls="collapsePages">#}
+{#                <i class="fas fa-fw fa-folder"></i>#}
+{#                <span>Gestion Des Ouevres</span>#}
+{#            </a>#}
+{#            <div id="collapsePages6" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">#}
+{#                <div class="bg-white py-2 collapse-inner rounded">#}
+
+{#                    <a class="collapse-item" href="/historiquevente">Liste Des Oeuvres Vendues</a>#}
+{#                    <a class="collapse-item" href="/indexOeuvre">Liste Des Oeuvres</a>#}
+{#                    <a class="collapse-item" href="/addproduit">Ajouter un Oeuvre </a>#}
+{#                    <a class="collapse-item" href="/historiquevente/new">Ajouter un Oeuvre Vendu</a>#}
+
+
+
+{#                </div>#}
+{#        </li>#}
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages7"
+               aria-expanded="true" aria-controls="collapsePages">
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Gestion Des Utilisateurs</span>
+            </a>
+            <div id="collapsePages7" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    <a class="collapse-item" href="/user/">Utilisateurs </a>
+                    <a class="collapse-item" href="/type">Categories</a>
+                    <a class="collapse-item" href="{{ path('app_stats') }}">Statistiques</a>
+
+                </div>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -135,9 +254,11 @@
 
                 <!-- Sidebar Toggle (Topbar) -->
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
+                    frg
                 </button>
 
+
+                {% block search %}
                 <!-- Topbar Search -->
                 <form  method="post" action="/event/recherche"
                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -151,10 +272,10 @@
                         </div>
                     </div>
                 </form>
+                {% endblock %}
 
 
-
-
+                <a href="/login" style="margin-left: 19%"><button class="btn btn-info" >Se Déconnecter</button></a>
 
 
 
@@ -163,7 +284,7 @@
 
             </nav>
             <!-- End of Topbar -->
-
+{% block superbody %}
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 {% block body %}
@@ -410,6 +531,8 @@
             </div>
             <!-- /.container-fluid -->
             {% endblock %}
+            </div>
+        {% endblock %}
         </div>
         <!-- End of Main Content -->
 
@@ -465,6 +588,71 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('back-office/js/demo/chart-area-demo.js') }}"></script>
 <script src="{{ asset('back-office/js/demo/chart-pie-demo.js') }}"></script>
+
+<!-- MALEK -->
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+        $(".datepicker").datepicker();
+        $('#prodCMa').DataTable();
+        $('#prodpm').DataTable();
+        setTimeout(function () {
+            $(".alert").addClass('dspnone')
+        }, 7000);
+    });
+
+
+    function deleteItem(idprod) {
+        Swal.fire({
+            title: 'Êtes-vous sûr?',
+            text: "Vous ne pourrez pas revenir en arrière!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ui, supprimez-le!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '/produitpm/removeproduit/' + idprod;
+
+            }
+        })
+
+    }
+
+</script>
+<!-- end MALEK -->
+<!-- maram -->
+
+<script>
+    function deleteItemMaram(Idprod ){
+        Swal.fire({
+            title: 'Êtes-vous sûr?',
+            text: "Vous ne pourrez pas revenir en arrière!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ui, supprimez-le!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(Idprod).submit();
+
+            }
+        })
+
+    }
+</script>
+
+<script src="{{ asset('client/js/table-amira.js') }}"></script>
+
+
 </body>
 
 </html>

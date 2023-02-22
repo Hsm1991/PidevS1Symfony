@@ -1,4 +1,5 @@
-{% extends 'base-back.html.twig' %}
+{% extends getRole(app.request) == "ROLE_ARTISTE" ? "base-front-artiste.html.twig" :  getRole(app.request) == "ROLE_PRESTATAIRE"  ? 'base-back-prest.html.twig' : 'base-back.html.twig' %}
+
 
 {% block title %}Evenement{% endblock %}
 
@@ -41,7 +42,7 @@
             </tr>
             <tr>
                 <th class="h5">CategorieEvent</th>
-                < class="h4">{{ evenement.CategorieEvent }}</td>
+                <td class="h4">{{ evenement.CategorieEvent }}</td>
             </tr>
             <tr>
                 <th class="h5">PrixEntre</th>
